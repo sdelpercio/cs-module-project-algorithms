@@ -7,20 +7,27 @@ def moving_zeroes(arr):
     if 0 not in arr:
         return arr
     
-    # otherwise
-    else:
-        i = 0
-        # loop through array
-        while i < len(arr):
-            # find next item that is non-zero, pop off, insert at beginning
-            if arr[i] != 0:
-                popped = arr.pop(i)
-                arr.insert(0, popped)
-                i += 1
-            else:
-                i += 1
-        
-        return arr
+    # initialize left, right pointers
+    left = 0
+    right = len(arr) - 1
+    
+    # loop through array with pointers
+    while left < right:
+        # if left sees zero and right doesnt
+        if arr[left] == 0 and arr[right] != 0:
+            # swap, then move inwards
+            arr[left], arr[right] = arr[right], arr[left]
+            left += 1
+            right -= 1
+        else:
+            # continue if non-zero on left
+            if arr[left] != 0:
+                left += 1
+            # continue if zero on right
+            if arr[right] == 0:
+                right -= 1
+    
+    return arr
 
 
 if __name__ == '__main__':
