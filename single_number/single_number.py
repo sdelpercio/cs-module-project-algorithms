@@ -3,21 +3,20 @@ Input: a List of integers where every int except one shows up twice
 Returns: an integer
 '''
 def single_number(arr):
+    # initialize dictionary
+    singles_only = {}
     
     # loop through array
-    for i in range(0, len(arr)):
-        # pop off item
-        popped = arr.pop(i)
-        # if item is still in array, add it back in
-        if popped in arr:
-            arr.append(popped)
-            continue
-        # else that is the single item
+    for i in arr:
+        # if number is duplicate, delete
+        if i in singles_only:
+            del singles_only[i]
+        
+        # else add to dictionary
         else:
-            return popped
+            singles_only[i] = 1
         
-        
-
+    return next(iter(singles_only))
 
 
 if __name__ == '__main__':
